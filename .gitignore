@@ -1,0 +1,12 @@
+.pio/
+.vscode/
+
+# PlatformIO / build artifacts
+.sconsign.dblite
+compile_commands.json
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
