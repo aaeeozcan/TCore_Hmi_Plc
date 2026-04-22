@@ -2,12 +2,27 @@
 
 ## Durum Ozeti
 
-Bu dokuman HMI ile PLC arasindaki ilk Modbus veri modelini tanimlar. Tavsiye edilen mimari:
+Bu dokuman HMI ile PLC arasindaki revize Modbus veri modelini tanimlar.
+
+Tavsiye edilen mimari:
 
 - HMI = `Modbus Master`
 - PLC = `Modbus Slave`
 
 HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
+
+Bu surum, board'un su fiziksel kabiliyetlerine gore revize edilmistir:
+
+- `16` DI
+- `8` DO
+- `2` AO (`12V`)
+- `2` PT100
+- `4` adet `4-20mA` AI
+- `1` `DS18B20`
+- `1` `I2C`
+- `RS485`
+- `CANbus`
+- `Ethernet Modbus`
 
 ## Adresleme Kurali
 
@@ -25,6 +40,9 @@ HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
 | `00001` | `PV_CMD_GLOBAL_ALARM_ACK_REQ` | tum aktif alarm ack istegi |
 | `00002` | `PV_CMD_GLOBAL_ALARM_RESET_REQ` | resetlenebilir alarm reset istegi |
 | `00003` | `PV_CMD_GLOBAL_HORN_SILENCE_REQ` | horn/sound silence |
+| `00004` | `PV_CMD_GLOBAL_LAMP_TEST_REQ` | tum indikator test istegi |
+| `00005` | `PV_CMD_GLOBAL_MODE_AUTO_REQ` | sistem auto moda gecis istegi |
+| `00006` | `PV_CMD_GLOBAL_MODE_MAN_REQ` | sistem manual moda gecis istegi |
 
 ### Ventilation
 
@@ -50,19 +68,26 @@ HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
 | `00037` | `PV_CMD_LGT_04_ON_REQ` |
 | `00038` | `PV_CMD_LGT_04_OFF_REQ` |
 
-### Energy / Auxiliary
+### Auxiliary
 
 | Adres | Variable |
 |---|---|
 | `00051` | `PV_CMD_PMP_01_START_REQ` |
 | `00052` | `PV_CMD_PMP_01_STOP_REQ` |
 | `00053` | `PV_CMD_PMP_01_RESET_REQ` |
-| `00054` | `PV_CMD_BAR_01_OPEN_REQ` |
-| `00055` | `PV_CMD_BAR_01_CLOSE_REQ` |
-| `00056` | `PV_CMD_BAR_02_OPEN_REQ` |
-| `00057` | `PV_CMD_BAR_02_CLOSE_REQ` |
-| `00058` | `PV_CMD_VMS_01_ENABLE_REQ` |
-| `00059` | `PV_CMD_LCS_01_ENABLE_REQ` |
+| `00054` | `PV_CMD_VMS_01_ENABLE_REQ` |
+| `00055` | `PV_CMD_LCS_01_ENABLE_REQ` |
+| `00056` | `PV_CMD_BAR_01_OPEN_REQ` |
+| `00057` | `PV_CMD_BAR_01_CLOSE_REQ` |
+| `00058` | `PV_CMD_BAR_02_OPEN_REQ` |
+| `00059` | `PV_CMD_BAR_02_CLOSE_REQ` |
+
+### Analog / Reference
+
+| Adres | Variable |
+|---|---|
+| `00071` | `PV_CMD_AO_01_ENABLE_REQ` |
+| `00072` | `PV_CMD_AO_02_ENABLE_REQ` |
 
 ## Discrete Input Haritasi
 
@@ -78,6 +103,10 @@ HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
 | `10006` | `PV_ALM_SUM_CRITICAL` |
 | `10007` | `PV_ALM_SUM_MAJOR` |
 | `10008` | `PV_ALM_SUM_MINOR` |
+| `10009` | `PV_SYS_RS485_COMM_OK` |
+| `10010` | `PV_SYS_CAN_COMM_OK` |
+| `10011` | `PV_SYS_ETH_COMM_OK` |
+| `10012` | `PV_SYS_RTC_SYNC_OK` |
 
 ### JF-01
 
@@ -130,6 +159,20 @@ HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
 | `10310` | `PV_STS_BAR_01_FB_CLOSED` |
 | `10311` | `PV_STS_BAR_02_FB_OPEN` |
 | `10312` | `PV_STS_BAR_02_FB_CLOSED` |
+| `10313` | `PV_STS_REMOTE_LOCAL_SEL_FB` |
+
+### Sensor / Process Bits
+
+| Adres | Variable |
+|---|---|
+| `10401` | `PV_STS_CO_SENSOR_OK` |
+| `10402` | `PV_STS_VIS_SENSOR_OK` |
+| `10403` | `PV_STS_SUMP_LEVEL_SENSOR_OK` |
+| `10404` | `PV_STS_PT100_01_OK` |
+| `10405` | `PV_STS_PT100_02_OK` |
+| `10406` | `PV_STS_DS18B20_01_OK` |
+| `10407` | `PV_STS_ENERGY_METER_OK` |
+| `10408` | `PV_STS_CAN_AUX_DEV_OK` |
 
 ## Holding Register Haritasi
 
@@ -142,8 +185,20 @@ HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
 | `40003` | `PV_SET_JF_01_MODE` | 0=off,1=manual,2=auto |
 | `40004` | `PV_SET_JF_02_MODE` | 0=off,1=manual,2=auto |
 | `40005` | `PV_SET_PMP_01_MODE` | 0=off,1=manual,2=auto |
+| `40006` | `PV_SET_VMS_01_MODE` | 0=off,1=manual,2=auto |
+| `40007` | `PV_SET_LCS_01_MODE` | 0=off,1=manual,2=auto |
 
-### Sayaçlar
+### Analog Set / Output
+
+| Adres | Variable | Aciklama |
+|---|---|---|
+| `40021` | `PV_SET_AO_01_RAW` | 0-10000 = scaled analog output |
+| `40022` | `PV_SET_AO_02_RAW` | 0-10000 = scaled analog output |
+| `40023` | `PV_SET_JF_01_SPEED_REF` | fan speed/ref |
+| `40024` | `PV_SET_JF_02_SPEED_REF` | fan speed/ref |
+| `40025` | `PV_SET_LIGHT_DIM_REF` | dim/ref |
+
+### Sayaclar
 
 | Adres | Variable |
 |---|---|
@@ -162,6 +217,8 @@ HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
 | `40202` | `PV_ALM_UNACK_CNT` |
 | `40203` | `PV_ALM_LAST_CODE` |
 | `40204` | `PV_ALM_LAST_SEV` |
+| `40205` | `PV_ALM_LAST_TS_HI` |
+| `40206` | `PV_ALM_LAST_TS_LO` |
 
 ### Alarm Bitmap
 
@@ -177,11 +234,22 @@ HMI sadece komut istegi yazar; PLC karar verir ve durum/feedback uretir.
 | Adres | Variable | Birim |
 |---|---|---|
 | `30001` | `PV_STS_TUNNEL_TEMP_C` | 0.1 C |
-| `30002` | `PV_STS_TUNNEL_HUMIDITY_PCT` | 0.1 % |
-| `30003` | `PV_STS_TUNNEL_CO_PPM` | ppm |
-| `30004` | `PV_STS_TUNNEL_VISIBILITY_M` | metre |
-| `30005` | `PV_STS_PWR_MAIN_VOLT` | V |
-| `30006` | `PV_STS_UPS_LOAD_PCT` | % |
+| `30002` | `PV_STS_MCC_ROOM_TEMP_C` | 0.1 C |
+| `30003` | `PV_STS_CABINET_TEMP_C` | 0.1 C |
+| `30004` | `PV_STS_TUNNEL_CO_PPM` | ppm |
+| `30005` | `PV_STS_TUNNEL_NOX_PPM` veya `VISIBILITY_RAW` | process |
+| `30006` | `PV_STS_SUMP_LEVEL_PCT` | % |
+| `30007` | `PV_STS_POWER_DEMAND_PCT` | % |
+| `30008` | `PV_STS_PWR_MAIN_VOLT` | V |
+| `30009` | `PV_STS_PWR_MAIN_CURR` | A |
+| `30010` | `PV_STS_PWR_MAIN_PWR_KW` | kW |
+| `30011` | `PV_STS_UPS_LOAD_PCT` | % |
+| `30012` | `PV_STS_UPS_BATT_PCT` | % |
+| `30013` | `PV_STS_GEN_FUEL_PCT` | % |
+| `30014` | `PV_STS_RS485_DEV_CNT` | count |
+| `30015` | `PV_STS_CAN_DEV_CNT` | count |
+| `30016` | `PV_STS_AO_01_FB_RAW` | raw |
+| `30017` | `PV_STS_AO_02_FB_RAW` | raw |
 
 ## Alarm Code Standardi
 
@@ -193,6 +261,7 @@ Alarm kodlari 4 haneli grup yapisinda onerilir:
 - `4xxx` = pump/drain
 - `5xxx` = fire & safety
 - `6xxx` = comm/system
+- `7xxx` = sensor / instrumentation
 
 Ornek:
 
@@ -202,13 +271,15 @@ Ornek:
 - `5002` = `FIRE_Z2_ACTIVE`
 - `5003` = `ESTOP_ACTIVE`
 - `6001` = `PLC_COMM_LOSS`
+- `7001` = `CO_SENSOR_FAIL`
+- `7002` = `VISIBILITY_SENSOR_FAIL`
+- `7003` = `PT100_01_FAIL`
+- `7004` = `PT100_02_FAIL`
+- `7005` = `DS18B20_FAIL`
+- `7006` = `ENERGY_METER_COMM_FAIL`
 
 ## Riskler / Acik Noktalar
 
 - Gercek PLC memory map ile cakisabilir, bu taslak hizalanmalidir
 - 32-bit sayaç alanlari icin register ciftleme ihtiyaci dogabilir
 - Runtime birimleri HMI editorunun destekledigi formatla uyumlandirilmalidir
-
-## Sonraki Adim
-
-Bu mapping, alarm/cause-effect ve ekran object listeleriyle baglanacak.

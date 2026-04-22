@@ -2,7 +2,7 @@
 
 ## Durum Ozeti
 
-Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable binding ve navigasyon iliskilerini tanimlar. Koordinatlar 1024x600 layout'a gore taslak olarak verilmis olup HMI editorunde son hizalama gerekecektir.
+Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable binding ve navigasyon iliskilerini tanimlar. Revizyon, board'un tum ana fonksiyonlarini HMI'da gorunur ve kullanilabilir kilacak sekilde guncellenmistir.
 
 ## Ortak Layout
 
@@ -19,11 +19,13 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | Object | Type | x | y | w | h | Binding |
 |---|---|---:|---:|---:|---:|---|
 | `LBL_PAGE_TITLE` | Label | 24 | 14 | 280 | 32 | internal |
-| `SHP_COMM_STATUS` | Shape | 760 | 15 | 24 | 24 | `PV_SYS_PLC_COMM_OK` |
-| `LBL_ALM_ACTIVE_CNT` | Label | 800 | 10 | 90 | 18 | `PV_ALM_ACTIVE_CNT` |
-| `LBL_ALM_UNACK_CNT` | Label | 800 | 30 | 90 | 18 | `PV_ALM_UNACK_CNT` |
-| `SHP_FIRE_SUMMARY` | Shape | 905 | 15 | 36 | 24 | `PV_SYS_FIRE_ACTIVE` |
-| `SHP_ESTOP_SUMMARY` | Shape | 952 | 15 | 36 | 24 | `PV_SYS_ESTOP_ACTIVE` |
+| `SHP_ETH_COMM` | Shape | 742 | 15 | 20 | 24 | `PV_SYS_ETH_COMM_OK` |
+| `SHP_RS485_COMM` | Shape | 768 | 15 | 20 | 24 | `PV_SYS_RS485_COMM_OK` |
+| `SHP_CAN_COMM` | Shape | 794 | 15 | 20 | 24 | `PV_SYS_CAN_COMM_OK` |
+| `LBL_ALM_ACTIVE_CNT` | Label | 828 | 10 | 90 | 18 | `PV_ALM_ACTIVE_CNT` |
+| `LBL_ALM_UNACK_CNT` | Label | 828 | 30 | 90 | 18 | `PV_ALM_UNACK_CNT` |
+| `SHP_FIRE_SUMMARY` | Shape | 926 | 15 | 36 | 24 | `PV_SYS_FIRE_ACTIVE` |
+| `SHP_ESTOP_SUMMARY` | Shape | 970 | 15 | 36 | 24 | `PV_SYS_ESTOP_ACTIVE` |
 
 ### Alt Menu Standart Objeler
 
@@ -40,8 +42,6 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 
 ## Dashboard
 
-### Object List
-
 | Object | Type | x | y | w | h | Binding |
 |---|---|---:|---:|---:|---:|---|
 | `GRP_DASH_MIMIC_OVERVIEW` | Shape | 16 | 76 | 470 | 330 | none |
@@ -56,29 +56,23 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | `LBL_UPS` | Label | 642 | 96 | 100 | 20 | `PV_STS_PWR_UPS_AVAILABLE` |
 | `LBL_GEN` | Label | 762 | 96 | 100 | 20 | `PV_STS_PWR_GEN_AVAILABLE` |
 | `LBL_MCC` | Label | 882 | 96 | 100 | 20 | `PV_STS_PWR_MCC_AVAILABLE` |
-| `LBL_SUM_COMM` | Label | 32 | 454 | 120 | 22 | `PV_SYS_PLC_COMM_OK` |
+| `LBL_SUM_COMM` | Label | 32 | 454 | 120 | 22 | `PV_SYS_ETH_COMM_OK` |
 | `LBL_SUM_FIRE` | Label | 180 | 454 | 120 | 22 | `PV_SYS_FIRE_ACTIVE` |
 | `LBL_SUM_ESTOP` | Label | 328 | 454 | 120 | 22 | `PV_SYS_ESTOP_ACTIVE` |
 | `LBL_SUM_MODE` | Label | 476 | 454 | 120 | 22 | `PV_SYS_MODE_AUTO` |
 | `LBL_SUM_ALARM` | Label | 624 | 454 | 140 | 22 | `PV_ALM_ACTIVE_CNT` |
-
-### Durum Davranis Kurali
-
-- enerji kartlari `available` durumuna gore yesil/gri/kirmizi olur
-- `PV_SYS_FIRE_ACTIVE` aktifse summary ve mimic overview blink eder
-- `PV_SYS_PLC_COMM_OK=0` ise sag kartlar communication degraded olur
+| `LBL_SUM_CO` | Label | 780 | 454 | 90 | 22 | `PV_STS_TUNNEL_CO_PPM` |
+| `LBL_SUM_TEMP` | Label | 892 | 454 | 100 | 22 | `PV_STS_TUNNEL_TEMP_C` |
 
 ## Mimic
-
-### Object List
 
 | Object | Type | x | y | w | h | Binding |
 |---|---|---:|---:|---:|---:|---|
 | `SHP_TUNNEL_BODY` | Shape | 84 | 154 | 700 | 170 | none |
 | `IMG_PORTAL_LEFT` | Image | 34 | 154 | 60 | 170 | none |
 | `IMG_PORTAL_RIGHT` | Image | 784 | 154 | 60 | 170 | none |
-| `SHP_FIRE_Z1` | TransShape | 210 | 124 | 180 | 230 | `PV_SYS_FIRE_ACTIVE` / `FIRE_Z1` |
-| `SHP_FIRE_Z2` | TransShape | 470 | 124 | 180 | 230 | `PV_SYS_FIRE_ACTIVE` / `FIRE_Z2` |
+| `SHP_FIRE_Z1` | TransShape | 210 | 124 | 180 | 230 | zone-1 fire |
+| `SHP_FIRE_Z2` | TransShape | 470 | 124 | 180 | 230 | zone-2 fire |
 | `IMG_JF_01` | Image | 270 | 182 | 80 | 80 | `PV_STS_JF_01_RUN` |
 | `IMG_JF_02` | Image | 530 | 182 | 80 | 80 | `PV_STS_JF_02_RUN` |
 | `SHP_LGT_01` | Shape | 120 | 332 | 140 | 18 | `PV_STS_LGT_01_FB_ON` |
@@ -90,19 +84,12 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | `IMG_BAR_01` | Image | 72 | 388 | 56 | 56 | `PV_STS_BAR_01_FB_OPEN` |
 | `IMG_BAR_02` | Image | 820 | 388 | 56 | 56 | `PV_STS_BAR_02_FB_OPEN` |
 | `IMG_PMP_01` | Image | 860 | 248 | 90 | 70 | `PV_STS_PMP_01_RUN` |
-| `LBL_RIGHT_SUMMARY` | Label | 860 | 150 | 130 | 80 | multiple |
-
-### Durum Davranis Kurali
-
-- `fault` varsa ilgili ekipman kirmizi outline ile gosterilir
-- `run` varsa yesil
-- `local` varsa mavi yerine sari-mavi accent
-- `fire zone` aktifse ilgili transshape blink eder
-- `e-stop` aktifse tunnel altinda buyuk kirmizi bant gosterilir
+| `LBL_AI_CO` | Label | 860 | 340 | 130 | 20 | `PV_STS_TUNNEL_CO_PPM` |
+| `LBL_AI_LEVEL` | Label | 860 | 365 | 130 | 20 | `PV_STS_SUMP_LEVEL_PCT` |
+| `LBL_TEMP_TUNNEL` | Label | 860 | 390 | 130 | 20 | `PV_STS_TUNNEL_TEMP_C` |
+| `LBL_TEMP_CAB` | Label | 860 | 415 | 130 | 20 | `PV_STS_CABINET_TEMP_C` |
 
 ## Ventilation
-
-### Object List
 
 | Object | Type | x | y | w | h | Binding |
 |---|---|---:|---:|---:|---:|---|
@@ -114,19 +101,13 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | `BTN_JF_02_START` | Button | 574 | 220 | 100 | 38 | `PV_CMD_JF_02_START_REQ` |
 | `BTN_JF_02_STOP` | Button | 684 | 220 | 100 | 38 | `PV_CMD_JF_02_STOP_REQ` |
 | `BTN_JF_02_RESET` | Button | 794 | 220 | 100 | 38 | `PV_CMD_JF_02_RESET_REQ` |
-| `LBL_JF_01_STATE` | Label | 70 | 130 | 220 | 24 | `PV_STS_JF_01_RUN` + status bits |
-| `LBL_JF_02_STATE` | Label | 574 | 130 | 220 | 24 | `PV_STS_JF_02_RUN` + status bits |
 | `LBL_VENT_MODE` | Label | 40 | 320 | 200 | 24 | `PV_SET_VENT_GLOBAL_MODE` |
-
-### Durum Davranis Kurali
-
-- `local` iken start/stop butonlari disable
-- `fault` varsa reset butonu vurgulanir
-- `ready=0` ise start butonu gri kalir
+| `LBL_CO_VALUE` | Label | 40 | 360 | 200 | 24 | `PV_STS_TUNNEL_CO_PPM` |
+| `LBL_VIS_VALUE` | Label | 260 | 360 | 200 | 24 | `PV_STS_TUNNEL_NOX_PPM` veya `VISIBILITY` |
+| `LBL_AO_01_REF` | Label | 480 | 360 | 200 | 24 | `PV_SET_AO_01_RAW` |
+| `LBL_AO_01_FB` | Label | 700 | 360 | 200 | 24 | `PV_STS_AO_01_FB_RAW` |
 
 ## Lighting
-
-### Object List
 
 | Object | Type | x | y | w | h | Binding |
 |---|---|---:|---:|---:|---:|---|
@@ -143,10 +124,10 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | `BTN_LGT_04_ON` | Button | 794 | 210 | 74 | 34 | `PV_CMD_LGT_04_ON_REQ` |
 | `BTN_LGT_04_OFF` | Button | 878 | 210 | 74 | 34 | `PV_CMD_LGT_04_OFF_REQ` |
 | `LBL_LIGHT_MODE` | Label | 32 | 300 | 220 | 24 | `PV_SET_LIGHTING_GLOBAL_MODE` |
+| `LBL_AO_02_REF` | Label | 32 | 344 | 220 | 24 | `PV_SET_AO_02_RAW` |
+| `LBL_LIGHT_SCENE_INFO` | Label | 280 | 344 | 320 | 24 | `PV_SET_LIGHT_DIM_REF` |
 
 ## Energy
-
-### Object List
 
 | Object | Type | x | y | w | h | Binding |
 |---|---|---:|---:|---:|---:|---|
@@ -155,42 +136,50 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | `CARD_GENERATOR` | Shape | 528 | 102 | 210 | 180 | `PV_STS_PWR_GEN_AVAILABLE` |
 | `CARD_MCC` | Shape | 766 | 102 | 210 | 180 | `PV_STS_PWR_MCC_AVAILABLE` |
 | `LBL_MAIN_VOLT` | Label | 72 | 220 | 120 | 22 | `PV_STS_PWR_MAIN_VOLT` |
+| `LBL_MAIN_CURR` | Label | 72 | 246 | 120 | 22 | `PV_STS_PWR_MAIN_CURR` |
+| `LBL_MAIN_PWR` | Label | 72 | 272 | 120 | 22 | `PV_STS_PWR_MAIN_PWR_KW` |
 | `LBL_UPS_LOAD` | Label | 310 | 220 | 120 | 22 | `PV_STS_UPS_LOAD_PCT` |
+| `LBL_UPS_BATT` | Label | 310 | 246 | 120 | 22 | `PV_STS_UPS_BATT_PCT` |
+| `LBL_GEN_FUEL` | Label | 548 | 220 | 120 | 22 | `PV_STS_GEN_FUEL_PCT` |
+| `LBL_RS485_STATE` | Label | 766 | 220 | 150 | 22 | `PV_SYS_RS485_COMM_OK` |
+| `LBL_CAN_STATE` | Label | 766 | 246 | 150 | 22 | `PV_SYS_CAN_COMM_OK` |
 
 ## Alarm
-
-### Object List
 
 | Object | Type | x | y | w | h | Binding |
 |---|---|---:|---:|---:|---:|---|
 | `LBL_ALM_HEADER` | Label | 24 | 76 | 200 | 26 | none |
 | `BTN_ALM_ACK_ALL` | Button | 760 | 76 | 110 | 36 | `PV_CMD_GLOBAL_ALARM_ACK_REQ` |
 | `BTN_ALM_RESET_ALL` | Button | 886 | 76 | 120 | 36 | `PV_CMD_GLOBAL_ALARM_RESET_REQ` |
-| `LBL_ALM_ROW_01` | Label | 24 | 132 | 976 | 28 | `PV_ALM_LAST_CODE` / active list |
+| `LBL_ALM_ROW_01` | Label | 24 | 132 | 976 | 28 | active list |
 | `LBL_ALM_ROW_02` | Label | 24 | 166 | 976 | 28 | active list |
 | `LBL_ALM_ROW_03` | Label | 24 | 200 | 976 | 28 | active list |
 | `LBL_ALM_ROW_04` | Label | 24 | 234 | 976 | 28 | active list |
 | `LBL_ALM_ROW_05` | Label | 24 | 268 | 976 | 28 | active list |
 | `LBL_ALM_FOOTER` | Label | 24 | 500 | 400 | 20 | `PV_ALM_ACTIVE_CNT` / `PV_ALM_UNACK_CNT` |
+| `LBL_ALM_COMM_STATE` | Label | 460 | 500 | 280 | 20 | comm summary |
 
-## Navigation Iliskisi
+## Auxiliary Systems
 
-- `Dashboard` -> tum ekranlara ozet gecis
-- `Mimic` -> `Ventilation`, `Lighting`, `Energy`, `Auxiliary`, `Fire` hotzone gecisi
-- `Alarm` -> ilgili ekipman sayfasina detay gecis
+| Object | Type | x | y | w | h | Binding |
+|---|---|---:|---:|---:|---:|---|
+| `CARD_VMS_01` | Shape | 40 | 100 | 220 | 160 | `PV_STS_VMS_01_RUN` |
+| `CARD_LCS_01` | Shape | 282 | 100 | 220 | 160 | `PV_STS_LCS_01_RUN` |
+| `CARD_BAR_01` | Shape | 524 | 100 | 220 | 160 | `PV_STS_BAR_01_FB_OPEN` |
+| `CARD_BAR_02` | Shape | 766 | 100 | 220 | 160 | `PV_STS_BAR_02_FB_OPEN` |
+| `BTN_BAR_01_OPEN` | Button | 548 | 210 | 80 | 34 | `PV_CMD_BAR_01_OPEN_REQ` |
+| `BTN_BAR_01_CLOSE` | Button | 638 | 210 | 80 | 34 | `PV_CMD_BAR_01_CLOSE_REQ` |
+| `BTN_BAR_02_OPEN` | Button | 790 | 210 | 80 | 34 | `PV_CMD_BAR_02_OPEN_REQ` |
+| `BTN_BAR_02_CLOSE` | Button | 880 | 210 | 80 | 34 | `PV_CMD_BAR_02_CLOSE_REQ` |
 
-## Riskler / Acik Noktalar
+## Fire & Safety
 
-- HMI editorunde pixel snapping ve font metrikleri farkli olabilir
-- image asset isimlendirme standardi henuz yazilmadi
-- aktif alarm satir listesi runtime kabiliyetine gore custom mekanizma isteyebilir
-
-## Sonraki Adim
-
-Bu object listeleri sonraki turda:
-
-- reusable component listesine
-- image asset naming planina
-- popup/dialog akislarina
-
-donusturulebilir.
+| Object | Type | x | y | w | h | Binding |
+|---|---|---:|---:|---:|---:|---|
+| `CARD_FIRE_Z1` | Shape | 60 | 110 | 280 | 180 | zone-1 fire |
+| `CARD_FIRE_Z2` | Shape | 372 | 110 | 280 | 180 | zone-2 fire |
+| `CARD_ESTOP` | Shape | 684 | 110 | 280 | 180 | `PV_SYS_ESTOP_ACTIVE` |
+| `LBL_TUNNEL_TEMP` | Label | 60 | 320 | 200 | 24 | `PV_STS_TUNNEL_TEMP_C` |
+| `LBL_MCC_TEMP` | Label | 280 | 320 | 200 | 24 | `PV_STS_MCC_ROOM_TEMP_C` |
+| `LBL_CAB_TEMP` | Label | 500 | 320 | 200 | 24 | `PV_STS_CABINET_TEMP_C` |
+| `LBL_FIRE_ACK_HINT` | Label | 60 | 380 | 420 | 24 | alarm ack/reset status |
