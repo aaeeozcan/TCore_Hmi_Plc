@@ -41,6 +41,8 @@ ile calisacak sekilde dusunulur.
 - `ups_present`
 - `rtc_present`
 - `can_aux_devices_present`
+- `mobile_air_station_present`
+- `mobile_air_station_controls_strategy`
 
 ### Analog Kanal Atamalari
 
@@ -57,6 +59,8 @@ ile calisacak sekilde dusunulur.
 - `meter_link_type`
 - `aux_device_link_type`
 - `remote_service_port_enabled`
+- `mobile_station_link_type`
+- `mobile_station_protocol_id`
 
 ## Bu Demo Icin Profil
 
@@ -79,9 +83,13 @@ ile calisacak sekilde dusunulur.
 | `ups_present` | `true` |
 | `rtc_present` | `true` |
 | `can_aux_devices_present` | `true` |
+| `mobile_air_station_present` | `true` |
+| `mobile_air_station_controls_strategy` | `true` |
 | `hmi_link_type` | `Ethernet Modbus TCP` |
 | `meter_link_type` | `RS485 Modbus RTU` |
 | `aux_device_link_type` | `CANbus` |
+| `mobile_station_link_type` | `LoRa -> ADV -> RS485` |
+| `mobile_station_protocol_id` | `to be defined` |
 
 ## Profilin HMI'ya Etkisi
 

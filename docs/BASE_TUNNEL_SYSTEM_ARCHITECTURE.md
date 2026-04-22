@@ -36,6 +36,7 @@ Gercek fiziksel ve haberlesme katmani:
 - CANbus
 - Ethernet Modbus
 - I2C RTC
+- LoRa tabanli mobil hava kalite istasyonu
 
 ### 2. Device Abstraction Layer
 
@@ -45,6 +46,10 @@ Her fiziksel veri sinyale donusur:
 - `main_energy_ok`
 - `tunnel_co_ppm`
 - `cabinet_temp_c`
+- `mobile_aqs_pm25`
+- `mobile_aqs_pm10`
+- `mobile_aqs_co`
+- `mobile_aqs_latlon`
 
 Bu katman saha bagimliligini yukaridan ayirir.
 
@@ -59,6 +64,7 @@ Her ekipman bir standart function block ile temsil edilir:
 - `fb_vms`
 - `fb_lcs`
 - `fb_power_source`
+- `fb_mobile_air_station`
 - `fb_alarm_manager`
 - `fb_comm_manager`
 
@@ -84,6 +90,8 @@ Sistem seviyesinde mantik:
 - lighting mode strategy
 - sump/pump strategy
 - communication degraded strategy
+- mobile air quality guided strategy
+- fixed sensor + mobile station data fusion
 
 ### 5. Data Contract Layer
 
@@ -93,6 +101,7 @@ HMI ile PLC arasindaki resmi veri kontrati:
 - Modbus mapping
 - alarm code listesi
 - event / timestamp modeli
+- mobil hava kalite istasyonu veri protokolu
 
 ### 6. HMI Operations Layer
 
@@ -127,6 +136,9 @@ Mutlaka gosterilmesi gerekenler:
 - degraded mode
 - runtime / starts counters
 - sensor invalid quality state
+- mobil istasyon online/offline durumu
+- mobil istasyon konumu ve son paket zamani
+- sabit sensor ile mobil sensor karsilastirma gorunumu
 
 ## SCADA Tadinda HMI Icin Gerekli Ozellikler
 
@@ -141,6 +153,8 @@ Demo HMI'da asgari su SCADA hissi olmali:
 - event/alarm timestamp
 - operator message / action feedback
 - maintenance/diagnostic ekranlari
+- mobil hava kalite istasyonu paneli
+- gaz/PM bazli otomatik aksiyon ozetleri
 
 ## Gercek Urun Ornekleri Kullanildiginda
 
@@ -163,6 +177,7 @@ Gercek sample urun eklenince:
 - Alarm
 - Auxiliary
 - Fire & Safety
+- Air Quality / Mobile Station
 
 ### Maintenance Screens
 
@@ -171,6 +186,8 @@ Gercek sample urun eklenince:
 - Sensor Diagnostic
 - Analog I/O Calibration
 - Device Detail Popup
+- LoRa packet monitor
+- RS485 protocol monitor
 
 ### Commissioning Screens
 
@@ -178,6 +195,31 @@ Gercek sample urun eklenince:
 - Register Watch
 - Event Timeline
 - Alarm Raw Bits
+- mobile station simulation
+
+## Mobil Hava Kalite Istasyonu Veri Zinciri
+
+Onerilen veri akisi:
+
+1. Mobil hava kalite istasyonu olcum alir
+2. LoRa uzerinden `ADV` board'una belirlenen ozel protokol ile veri basar
+3. `ADV`, konum + gaz + PM verilerini toplar
+4. `ADV`, bu veriyi `RS485` uzerinden HMI/PLC tarafina standartlastirilmis protokolle aktarir
+5. PLC bu veriyi:
+   - alarm
+   - ventilation strategy
+   - operator bilgi paneli
+   - event kaydi
+   icin kullanir
+
+## Mobil Istasyon Kullanım Amaci
+
+Bu unsur demoyu ciddi sekilde guclendirir cunku:
+
+- sistem sabit sensorlerle sinirli kalmaz
+- mobil olcum noktalari ile "dinamik saha gorusu" saglanir
+- tunnel icindeki lokal kirletici birikimleri mobil veriyle gosterilebilir
+- PLC'nin yalniz izleyen degil, kosullara gore aksiyon alan karar motoru oldugu ispatlanir
 
 ## Sonraki Adim
 

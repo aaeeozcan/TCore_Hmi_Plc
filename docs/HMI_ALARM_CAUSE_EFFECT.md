@@ -54,6 +54,10 @@ Bu dokuman revize board kaynaklarina gore alarm listesi ve cause & effect mantig
 | `7007` | `CAN_AUX_DEVICE_FAIL` | 2 | Evet | Hayir |
 | `7008` | `AI_4_20MA_OUT_OF_RANGE` | 2 | Evet | Hayir |
 | `7009` | `AO_CHANNEL_FAULT` | 2 | Evet | Hayir |
+| `7101` | `MAQS_COMM_LOSS` | 2 | Evet | Hayir |
+| `7102` | `MAQS_GAS_HIGH` | 3 | Evet | Evet |
+| `7103` | `MAQS_PM_HIGH` | 2 | Evet | Evet |
+| `7104` | `MAQS_LOCATION_ZONE_MISMATCH` | 1 | Evet | Hayir |
 
 ## Cause & Effect Matrix
 
@@ -82,6 +86,10 @@ Bu dokuman revize board kaynaklarina gore alarm listesi ve cause & effect mantig
 | `CAN_AUX_DEVICE_FAIL` | VMS/LCS/BARRIER ikonlari comm-fault overlay alir |
 | `AI_4_20MA_OUT_OF_RANGE` | ilgili proses degeri invalid range alarmi ile gosterilir |
 | `AO_CHANNEL_FAULT` | ventilation/lighting analog ref card'i fault border ile gosterilir |
+| `MAQS_COMM_LOSS` | mobile station paneli offline gosterilir, fixed sensor stratejisine dusulur |
+| `MAQS_GAS_HIGH` | ventilation stratejisi yuksek seviye moda gecebilir, operator popup acilir |
+| `MAQS_PM_HIGH` | fan ve hava kalite summary alanlari warning/critical gosterir |
+| `MAQS_LOCATION_ZONE_MISMATCH` | operatora veri konum tutarsizligi uyarisi verilir |
 
 ## Local / Remote / Auto / Manual Davranisi
 

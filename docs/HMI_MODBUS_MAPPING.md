@@ -250,6 +250,34 @@ Bu surum, board'un su fiziksel kabiliyetlerine gore revize edilmistir:
 | `30015` | `PV_STS_CAN_DEV_CNT` | count |
 | `30016` | `PV_STS_AO_01_FB_RAW` | raw |
 | `30017` | `PV_STS_AO_02_FB_RAW` | raw |
+| `30031` | `PV_STS_MAQS_PACKET_AGE_S` | s |
+| `30032` | `PV_STS_MAQS_CO_PPM` | ppm |
+| `30033` | `PV_STS_MAQS_CO2_PPM` | ppm |
+| `30034` | `PV_STS_MAQS_NO2_PPM` | ppm |
+| `30035` | `PV_STS_MAQS_SO2_PPM` | ppm |
+| `30036` | `PV_STS_MAQS_H2S_PPM` | ppm |
+| `30037` | `PV_STS_MAQS_CH4_PCTLEL` | %LEL |
+| `30038` | `PV_STS_MAQS_O2_PCT` | % |
+| `30039` | `PV_STS_MAQS_PM1_UGM3` | ug/m3 |
+| `30040` | `PV_STS_MAQS_PM25_UGM3` | ug/m3 |
+| `30041` | `PV_STS_MAQS_PM10_UGM3` | ug/m3 |
+| `30042` | `PV_STS_MAQS_TEMP_C` | 0.1 C |
+| `30043` | `PV_STS_MAQS_HUM_PCT` | 0.1 % |
+| `30044` | `PV_STS_MAQS_BATT_PCT` | % |
+| `30045` | `PV_STS_MAQS_SIGNAL_RSSI` | dBm scaled |
+| `30046` | `PV_STS_AIR_QUALITY_INDEX` | index |
+
+### Mobile Station Status Bits
+
+| Adres | Variable |
+|---|---|
+| `10421` | `PV_STS_MAQS_ONLINE` |
+| `10422` | `PV_STS_MAQS_COMM_OK` |
+| `10423` | `PV_STS_MAQS_QUALITY_OK` |
+| `10424` | `PV_STS_MAQS_GAS_ALARM` |
+| `10425` | `PV_STS_MAQS_PM_ALARM` |
+| `10426` | `PV_SYS_AIR_QUALITY_DEGRADED` |
+| `10427` | `PV_SYS_VENT_STRATEGY_FROM_MAQS` |
 
 ## Alarm Code Standardi
 

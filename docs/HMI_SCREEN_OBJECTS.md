@@ -40,6 +40,17 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | `BTN_NAV_AUX` | Button | 790 | 548 | 110 | 42 | Auxiliary |
 | `BTN_NAV_FIRE` | Button | 910 | 548 | 104 | 42 | Fire & Safety |
 
+## Dashboard Add-on Mobile Air Panel
+
+| Object | Type | x | y | w | h | Binding |
+|---|---|---:|---:|---:|---:|---|
+| `GRP_DASH_MAQS` | Shape | 504 | 340 | 504 | 72 | none |
+| `LBL_MAQS_ONLINE` | Label | 520 | 354 | 90 | 20 | `PV_STS_MAQS_ONLINE` |
+| `LBL_MAQS_CO` | Label | 620 | 354 | 80 | 20 | `PV_STS_MAQS_CO_PPM` |
+| `LBL_MAQS_PM25` | Label | 710 | 354 | 90 | 20 | `PV_STS_MAQS_PM25_UGM3` |
+| `LBL_MAQS_PM10` | Label | 810 | 354 | 90 | 20 | `PV_STS_MAQS_PM10_UGM3` |
+| `LBL_MAQS_AGE` | Label | 910 | 354 | 80 | 20 | `PV_STS_MAQS_PACKET_AGE_S` |
+
 ## Dashboard
 
 | Object | Type | x | y | w | h | Binding |
@@ -183,3 +194,26 @@ Bu dokuman ilk surum ekranlar icin object list, yerlesim mantigi, variable bindi
 | `LBL_MCC_TEMP` | Label | 280 | 320 | 200 | 24 | `PV_STS_MCC_ROOM_TEMP_C` |
 | `LBL_CAB_TEMP` | Label | 500 | 320 | 200 | 24 | `PV_STS_CABINET_TEMP_C` |
 | `LBL_FIRE_ACK_HINT` | Label | 60 | 380 | 420 | 24 | alarm ack/reset status |
+
+## Air Quality / Mobile Station
+
+| Object | Type | x | y | w | h | Binding |
+|---|---|---:|---:|---:|---:|---|
+| `CARD_MAQS_STATUS` | Shape | 32 | 92 | 280 | 180 | `PV_STS_MAQS_ONLINE` |
+| `CARD_MAQS_GAS` | Shape | 332 | 92 | 320 | 180 | multiple gas vars |
+| `CARD_MAQS_PM` | Shape | 672 | 92 | 320 | 180 | pm vars |
+| `LBL_MAQS_LOC` | Label | 52 | 130 | 220 | 22 | lat/lon or zone |
+| `LBL_MAQS_AGE` | Label | 52 | 158 | 220 | 22 | `PV_STS_MAQS_PACKET_AGE_S` |
+| `LBL_MAQS_RSSI` | Label | 52 | 186 | 220 | 22 | `PV_STS_MAQS_SIGNAL_RSSI` |
+| `LBL_MAQS_CO` | Label | 352 | 124 | 120 | 20 | `PV_STS_MAQS_CO_PPM` |
+| `LBL_MAQS_CO2` | Label | 352 | 150 | 120 | 20 | `PV_STS_MAQS_CO2_PPM` |
+| `LBL_MAQS_NO2` | Label | 352 | 176 | 120 | 20 | `PV_STS_MAQS_NO2_PPM` |
+| `LBL_MAQS_SO2` | Label | 492 | 124 | 120 | 20 | `PV_STS_MAQS_SO2_PPM` |
+| `LBL_MAQS_H2S` | Label | 492 | 150 | 120 | 20 | `PV_STS_MAQS_H2S_PPM` |
+| `LBL_MAQS_CH4` | Label | 492 | 176 | 120 | 20 | `PV_STS_MAQS_CH4_PCTLEL` |
+| `LBL_MAQS_PM1` | Label | 692 | 124 | 120 | 20 | `PV_STS_MAQS_PM1_UGM3` |
+| `LBL_MAQS_PM25` | Label | 692 | 150 | 120 | 20 | `PV_STS_MAQS_PM25_UGM3` |
+| `LBL_MAQS_PM10` | Label | 692 | 176 | 120 | 20 | `PV_STS_MAQS_PM10_UGM3` |
+| `LBL_MAQS_AQI` | Label | 832 | 124 | 120 | 20 | `PV_STS_AIR_QUALITY_INDEX` |
+| `LBL_MAQS_SRC` | Label | 832 | 150 | 120 | 20 | `PV_STS_AIR_QUALITY_SOURCE_SEL` |
+| `LBL_MAQS_ACT` | Label | 32 | 304 | 960 | 28 | ventilation action summary |

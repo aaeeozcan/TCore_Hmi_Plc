@@ -81,6 +81,8 @@ Her satir su sorulara cevap verir:
 | `RS485` | enerji analizoru / servis RTU | energy meter data | `PV_SYS_RS485_COMM_OK`, power vars | `30008-30013` ve ilgili health bitleri | Modbus RTU |
 | `CANbus` | yardimci cihaz agi | VMS/LCS/BARRIER states | `PV_SYS_CAN_COMM_OK`, aux vars | `10307-10312`, `10408` | cihaz protokolu netlesmeli |
 | `I2C` | RTC / local expander | timestamp source | `PV_SYS_RTC_SYNC_OK` | alarm timestamp / event log | ilk baseline icin RTC onerilir |
+| `LoRa -> ADV` | mobil hava kalite istasyonu uplink | gas/pm/location payload | `PV_STS_MAQS_*` kaynak verisi | RS485 cikisina koşul olur | protokol tanimlanacak |
+| `ADV -> RS485` | mobil istasyon veri aktarimi | konum + tum gaz + PM verisi | `PV_STS_MAQS_*`, `PV_SYS_MOBILE_AQS_ONLINE` | holding/input register bloklari eklenecek | HMI/PLC'ye saha veri injeksiyonu |
 
 ## Ekipman Bazli Ozet
 
@@ -122,6 +124,8 @@ Her satir su sorulara cevap verir:
 - `BAR_01` ve `BAR_02` sadece open feedback ile temsil edildi; close feedback istenirse DI genisleme gerekir veya CAN tarafindan okunur
 - `AI-02` icin visibility mi NOx mi kullanilacagi sahaya gore netlesmeli
 - Enerji analizor register haritasi geldiginde `30008-30013` alanlari kesinlestirilmeli
+- mobil hava kalite istasyonunun tam protokol frame yapisi henuz tanimli degil
+- konum bilgisinin enlem/boylam, zon ID veya tunnel chainage olarak mi gonderilecegi netlestirilmeli
 
 ## Sonraki Adim
 

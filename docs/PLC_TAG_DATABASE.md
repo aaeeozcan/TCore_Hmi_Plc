@@ -29,6 +29,8 @@ Bu dokuman, base tunnel sistemin PLC-HMI ortak veri sozlugudur. Amaç, fiziksel 
 | `PV_SYS_FIRE_ACTIVE` | bool | herhangi bir fire zone aktif |
 | `PV_SYS_ESTOP_ACTIVE` | bool | e-stop aktif |
 | `PV_SYS_REMOTE_MODE` | bool | sistem remote command kabul ediyor |
+| `PV_SYS_MOBILE_AQS_ONLINE` | bool | mobil hava kalite istasyonu online |
+| `PV_SYS_MOBILE_AQS_NEW_DATA` | bool | yeni paket geldi |
 
 ## Global Command Tags
 
@@ -143,6 +145,44 @@ Global:
 | `PV_STS_PT100_02_OK` | bool |
 | `PV_STS_DS18B20_01_OK` | bool |
 
+## Mobile Air Quality Station Tags
+
+| Tag | Tip |
+|---|---|
+| `PV_STS_MAQS_ONLINE` | bool |
+| `PV_STS_MAQS_COMM_OK` | bool |
+| `PV_STS_MAQS_PACKET_AGE_S` | uint16 |
+| `PV_STS_MAQS_LAT_HI` | uint16 |
+| `PV_STS_MAQS_LAT_LO` | uint16 |
+| `PV_STS_MAQS_LON_HI` | uint16 |
+| `PV_STS_MAQS_LON_LO` | uint16 |
+| `PV_STS_MAQS_CO_PPM` | uint16 |
+| `PV_STS_MAQS_CO2_PPM` | uint16 |
+| `PV_STS_MAQS_NO2_PPM` | uint16 |
+| `PV_STS_MAQS_SO2_PPM` | uint16 |
+| `PV_STS_MAQS_H2S_PPM` | uint16 |
+| `PV_STS_MAQS_CH4_PCTLEL` | uint16 |
+| `PV_STS_MAQS_O2_PCT` | uint16 |
+| `PV_STS_MAQS_PM1_UGM3` | uint16 |
+| `PV_STS_MAQS_PM25_UGM3` | uint16 |
+| `PV_STS_MAQS_PM10_UGM3` | uint16 |
+| `PV_STS_MAQS_TEMP_C` | int16 |
+| `PV_STS_MAQS_HUM_PCT` | uint16 |
+| `PV_STS_MAQS_BATT_PCT` | uint16 |
+| `PV_STS_MAQS_SIGNAL_RSSI` | int16 |
+| `PV_STS_MAQS_QUALITY_OK` | bool |
+| `PV_STS_MAQS_GAS_ALARM` | bool |
+| `PV_STS_MAQS_PM_ALARM` | bool |
+
+## Mobile Station Derived Tags
+
+| Tag | Tip | Aciklama |
+|---|---|---|
+| `PV_SYS_AIR_QUALITY_DEGRADED` | bool | genel hava kalitesi kotu |
+| `PV_SYS_VENT_STRATEGY_FROM_MAQS` | bool | ventilation stratejisi mobil istasyon verisinden etkileniyor |
+| `PV_STS_AIR_QUALITY_INDEX` | uint16 | hesaplanan ozet indeks |
+| `PV_STS_AIR_QUALITY_SOURCE_SEL` | uint16 | 0=fixed 1=mobile 2=fused |
+
 ## Auxiliary Tags
 
 | Tag | Tip |
@@ -190,6 +230,7 @@ Bu alanlar "SCADA hissi" verir:
 | `PV_SYS_OPERATOR_LEVEL` | uint16 | role-based UI |
 | `PV_SYS_DEMO_MODE` | bool | fuar/demo davranisi |
 | `PV_SYS_FORCE_MODE_ACTIVE` | bool | commissioning view |
+| `PV_SYS_LAST_MAQS_EVENT_CODE` | uint16 | son mobil istasyon olayi |
 
 ## Sonraki Adim
 
